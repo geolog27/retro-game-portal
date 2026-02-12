@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Play Flash Game</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{background:#111;color:#fff;font-family:Arial;text-align:center}
+    #game{width:100%;max-width:960px;height:600px;margin:20px auto;background:#000}
+  </style>
+</head>
+<body>
+  <h1 id="title">Flash Game</h1>
+  <div id="game">Loading…</div>
+
+  <script src="ruffle/ruffle.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const file = params.get('file');
+    const title = params.get('title') || 'Flash Game';
+    document.getElementById('title').textContent = title;
+
+    if (!file) {
+      document.getElementById('game').textContent = 'No game selected.';
+    } else {
+      const ruffle = window.RufflePlayer ? window.RufflePlayer.newest() : null;
+      if (!ruffle) {
+        document.getElementById('game').textContent = 'Ruffle not loaded.';
+      } else {
+        const player = ruffle.createPlayer();
+        document.getElementById('game').innerHTML = '';
+        document.getElementById('game').appendChild(player);
+        player.load(`flash-games/${file}`);
+      }
+    }
+  </script>
+</body>
+</html>
