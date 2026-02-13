@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Play HTML5 Game</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{
+      margin:0;
+      background:#020617;
+      color:#e5e7eb;
+      font-family:system-ui,Arial,sans-serif;
+      text-align:center;
+    }
+    iframe{
+      width:100%;
+      height:90vh;
+      border:none;
+      background:#000;
+    }
+    #exit{
+      margin:10px;
+      padding:8px 14px;
+      background:#1e293b;
+      color:#e5e7eb;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+    }
+    #exit:hover{
+      background:#334155;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="title">HTML5 Game</h1>
+
+<iframe id="frame"></iframe>
+
+<button id="exit">Exit to Game List</button>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const folder = params.get("folder");
+  const title = params.get("title");
+
+  document.getElementById("title").textContent = title;
+  document.getElementById("frame").src = "html5-games/" + folder + "/index.html";
+
+  document.getElementById("exit").onclick = () => {
+    window.location.href = "index.html";
+  };
+</script>
+
+</body>
+</html>
